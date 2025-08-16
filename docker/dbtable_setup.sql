@@ -75,4 +75,5 @@ CREATE TABLE roles (
 
 INSERT INTO Roles (role_id, role_name) VALUES
 (1, 'Admin'),
-(2, 'Viewer');
+(2, 'Viewer'),
+(3, 'Member');
