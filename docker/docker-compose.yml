@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_learning
+    environment:
+      POSTGRES_DB: learning
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./dbtable_setup.sql:/docker-entrypoint-initdb.d/dbtable_setup.sql  # optional schema
+
+  adminer:
+    image: adminer
+    container_name: adminer_ui
+    environment:
+      TZ: Asia/Kolkata
+    ports:
+      - "8080:8080"
+  app:
+    image: myapp
+    container_name: myapp
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/learning
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+    ports:
+      - "8181:8181"
+
+volumes:
+  postgres_data:
