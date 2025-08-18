@@ -5,5 +5,5 @@ import java.util.UUID
 data class GroupRequest(
     val name: String,
     val description: String?,
-    val members: List<UUID> // list of userIds
+    val members: List<String> // list of userIds
 )

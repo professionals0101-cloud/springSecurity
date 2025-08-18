@@ -7,35 +7,37 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthFilter;
+    private final String SECRET = "my-super-secret-key-that-should-be-very-long-and-secure";
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter){
-        this.jwtAuthFilter = jwtAuthFilter;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/test").authenticated();
-                    //auth.requestMatchers("/api/users/**").permitAll();
-                    //auth.requestMatchers("/api/users/**").permitAll();
+                    auth.requestMatchers("/api/groups").authenticated();
                     auth.requestMatchers("/auth/**").permitAll();
                 })
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())) //  enable JWT decoding
                 .build();
     }
 
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        // Use the same secret key you used to generate JWT
+        return NimbusJwtDecoder.withSecretKey(
+                new javax.crypto.spec.SecretKeySpec(SECRET.getBytes(), "HmacSHA256")
+        ).build();
+    }
 }
 

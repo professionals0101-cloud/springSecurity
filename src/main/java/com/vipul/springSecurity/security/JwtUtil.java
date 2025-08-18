@@ -11,8 +11,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     private final String SECRET = "my-super-secret-key-that-should-be-very-long-and-secure";
-    private final Key key = Keys.hmacShaKeyFor(Base64.getEncoder().encode(SECRET.getBytes()));
-
+    private final Key key = new javax.crypto.spec.SecretKeySpec(SECRET.getBytes(), "HmacSHA256");
 
     private final long ACCESS_TOKEN_VALIDITY = 15 * 60 * 1000; // 15 min
     private final long REFRESH_TOKEN_VALIDITY = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -21,7 +20,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(userId)
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY))
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -29,7 +28,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(userId)
                 .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALIDITY))
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
