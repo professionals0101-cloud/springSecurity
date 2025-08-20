@@ -21,7 +21,7 @@ data class MemberProfile(
     val relation: String? = null,
 
     @Column(nullable = false, unique = true)
-    val mobile: String,
+    val mobile: Long,
 
     val email: String? = null,
     val avatarUrl: String? = null

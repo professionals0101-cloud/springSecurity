@@ -18,13 +18,20 @@ data class GroupMemberRelation(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @Column(name = "group_id")
+    val group: Long,
+
+    @Column(name = "member_id")
+    val member: Long,
+
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     val group: GroupDtl,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    val member: MemberProfile,
+    val member: MemberProfile,*/
 
     @Column(name = "is_admin")
     val isAdmin: Boolean = false,

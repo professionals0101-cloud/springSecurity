@@ -49,7 +49,7 @@ data class GroupDtl(
     var perTransactionLimit: BigDecimal? = null,
 
     @Column(name = "created_by")
-    var createdBy: String,
+    var createdBy: Long,
 
     @Column(name = "created_timestamp")
     var createdTimestamp: LocalDateTime = LocalDateTime.now(),

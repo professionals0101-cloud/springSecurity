@@ -1,26 +1,25 @@
 package com.vipul.springSecurity.controller
 
 import com.vipul.springSecurity.request.GroupRequest
-import com.vipul.springSecurity.response.GroupResponse
+import com.vipul.springSecurity.response.GroupCreateResponse
 import com.vipul.springSecurity.service.GroupService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @RestController
-@RequestMapping("/api/groups")
+@RequestMapping("/api")
 class GroupController(
     private val groupService : GroupService
 ) {
 
     // Create new group
-    @PostMapping
+    @PostMapping("/groups")
     fun createGroup(
         @RequestBody groupRequest: GroupRequest,
         @AuthenticationPrincipal principal : Jwt
-    ): ResponseEntity<GroupResponse> {
+    ): ResponseEntity<GroupCreateResponse> {
         val userId = principal.subject
         val group = groupService.createGroup(groupRequest, userId);
         return ResponseEntity.ok(group)
@@ -42,19 +41,16 @@ class GroupController(
             members = emptyList()
         )
         return ResponseEntity.ok(group)
-    }
+    }*/
 
-    //  List groups for a user
-    @GetMapping
-    fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<GroupResponse>> {
+    // List groups for a user
+    @GetMapping("/groups")
+    fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<String>> {
         val userId: String = principal.getClaim("sub")
-        val groups = listOf(
-            GroupResponse(UUID.randomUUID(), "Goa Trip", "Friends trip", userId, listOf(userId)),
-            GroupResponse(UUID.randomUUID(), "Flat Rent", "Monthly rent split", userId, listOf(userId))
-        )
+        val groups = groupService.getAllGroupsForUserId(userId)
         return ResponseEntity.ok(groups)
     }
-
+/*
     //  Update group details
     @PutMapping("/{groupId}")
     fun updateGroup(

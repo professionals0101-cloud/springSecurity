@@ -70,6 +70,7 @@ CREATE TABLE transaction (
 
 
 -- 5) Roles Table (reference if needed)
+
 CREATE TABLE roles (
     role_id   SERIAL PRIMARY KEY,
     role_name VARCHAR(20) UNIQUE NOT NULL CHECK (role_name IN ('Admin','Member','Viewer'))

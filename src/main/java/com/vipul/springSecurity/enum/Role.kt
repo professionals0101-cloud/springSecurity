@@ -1,7 +1,7 @@
 package com.vipul.springSecurity.enum
 
-enum class Role {
-    ADMIN,
-    MEMBER,
-    VIEWER
+enum class Role(val value: String) {
+    ADMIN("Admin"),
+    MEMBER("Member"),
+    VIEWER("Viewer")
 }
