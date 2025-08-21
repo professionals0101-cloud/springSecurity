@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String SECRET = "my-super-secret-key-that-should-be-very-long-and-secure";
+    private final String SECRET = "jhashaj34jklda9adk9pa92jjb3kbhjakhsjii99adsk9wjb9bjbas9999asdjk99999asjbkjb232jbjkbads8baksjdbkbaksj";
 
 
     @Bean

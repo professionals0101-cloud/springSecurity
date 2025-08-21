@@ -20,17 +20,6 @@ services:
       TZ: Asia/Kolkata
     ports:
       - "8080:8080"
-  app:
-    image: myapp
-    container_name: myapp
-    depends_on:
-      - postgres
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/learning
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin123
-    ports:
-      - "8181:8181"
 
 volumes:
   postgres_data:

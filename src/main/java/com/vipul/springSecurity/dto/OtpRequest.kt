@@ -1,3 +1,3 @@
 package com.vipul.springSecurity.dto
 
-class OtpRequest (val mobile :String)
+class OtpRequest (val mobile :Long)

@@ -20,7 +20,7 @@ class GroupController(
         @RequestBody groupRequest: GroupRequest,
         @AuthenticationPrincipal principal : Jwt
     ): ResponseEntity<GroupCreateResponse> {
-        val userId = principal.subject
+        val userId = principal.subject.toLong()
         val group = groupService.createGroup(groupRequest, userId);
         return ResponseEntity.ok(group)
     }
@@ -46,7 +46,7 @@ class GroupController(
     // List groups for a user
     @GetMapping("/groups")
     fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<String>> {
-        val userId: String = principal.getClaim("sub")
+        val userId = principal.subject.toLong()
         val groups = groupService.getAllGroupsForUserId(userId)
         return ResponseEntity.ok(groups)
     }

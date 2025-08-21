@@ -1,6 +1,6 @@
 -- 1) Group Table
 CREATE TABLE group_dtl (
-    group_id              SERIAL PRIMARY KEY,
+    group_id              BIGSERIAL PRIMARY KEY,
     group_name            VARCHAR(255) NOT NULL,
     group_amount          NUMERIC(12,2) DEFAULT 0,
     group_spent           NUMERIC(12,2) DEFAULT 0,
@@ -14,18 +14,18 @@ CREATE TABLE group_dtl (
     daily_usage_limit     NUMERIC(12,2),
     per_person_limit      NUMERIC(12,2),
     per_transaction_limit NUMERIC(12,2),
-    created_by            VARCHAR(100),
+    created_by            BIGINT,
     created_timestamp     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_updated_by       VARCHAR(100),
+    last_updated_by       BIGINT,
     last_updated_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 2) Member Profile Table
 CREATE TABLE member_profile (
-    member_id   SERIAL PRIMARY KEY,
-    member_name VARCHAR(255) NOT NULL,
+    member_id   BIGSERIAL PRIMARY KEY,
+    member_name VARCHAR(255),
     relation    VARCHAR(100),
-    mobile      VARCHAR(20) UNIQUE NOT NULL,
+    mobile      BIGINT UNIQUE NOT NULL,
     email       VARCHAR(255),
     avatar_url  TEXT
 );
@@ -33,10 +33,11 @@ CREATE TABLE member_profile (
 
 -- 3) Group-Member-Relation Table
 CREATE TABLE group_member_relation (
-    id             SERIAL PRIMARY KEY,
-    group_id       INT NOT NULL REFERENCES "group"(group_id) ON DELETE CASCADE,
-    member_id      INT NOT NULL REFERENCES member_profile(member_id) ON DELETE CASCADE,
+    id             BIGSERIAL PRIMARY KEY,
+    group_id       BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
+    member_id      BIGINT ,
     is_admin       BOOLEAN DEFAULT FALSE,
+    mobile         BIGINT NOT NULL,
     role           VARCHAR(20) CHECK (role IN ('Admin','Member','Viewer')),
     amount_added   NUMERIC(12,2) DEFAULT 0,
     amount_spent   NUMERIC(12,2) DEFAULT 0,
@@ -48,10 +49,10 @@ CREATE TABLE group_member_relation (
 
 -- 4) Transaction Table
 CREATE TABLE transaction (
-    transaction_id      SERIAL PRIMARY KEY,
-    group_id            INT NOT NULL REFERENCES "group"(group_id) ON DELETE CASCADE,
-    payer_id            INT NOT NULL REFERENCES member_profile(member_id),
-    receiver_id         INT,
+    transaction_id      BIGINT PRIMARY KEY,
+    group_id            BIGINT NOT NULL REFERENCES "group"(group_id) ON DELETE CASCADE,
+    payer_id            BIGINT NOT NULL REFERENCES member_profile(member_id),
+    receiver_id         BIGINT,
     receiver_type       VARCHAR(50),
     receiver_name       VARCHAR(255),
     receiver_account    VARCHAR(255),

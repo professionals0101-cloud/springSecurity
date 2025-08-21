@@ -15,8 +15,8 @@ data class MemberProfile(
     @Column(name = "member_id")
     val memberId: Long = 0,
 
-    @Column(name = "member_name", nullable = false)
-    val memberName: String,
+    @Column(name = "member_name")
+    val memberName: String? = null,
 
     val relation: String? = null,
 
@@ -25,5 +25,13 @@ data class MemberProfile(
 
     val email: String? = null,
     val avatarUrl: String? = null
-)
+){
+    companion object {
+        /** Java can call: MemberProfile.withMobile(9876543210L) */
+        @JvmStatic
+        fun withMobile(mobile: Long): MemberProfile =
+            MemberProfile(mobile = mobile)
+
+    }
+}
 

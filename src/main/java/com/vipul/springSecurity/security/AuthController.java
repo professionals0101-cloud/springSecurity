@@ -1,19 +1,27 @@
 package com.vipul.springSecurity.security;
 import com.vipul.springSecurity.dto.OtpRequest;
 import com.vipul.springSecurity.dto.VerifyOtpRequest;
+import com.vipul.springSecurity.model.MemberProfile;
+import com.vipul.springSecurity.repo.MemberRepo;
+import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
+    @Autowired
+    MemberRepo memberRepository;
+
     private final JwtUtil jwtUtil = new JwtUtil();
 
     // Mock OTP store (in real life, use DB or cache like Redis)
-    private final Map<String, String> otpStore = new HashMap<>();
+    private final Map<Long, String> otpStore = new HashMap<>();
 
     @PostMapping("/send-otp")
     public OtpResponse sendOtp(@RequestBody OtpRequest request) {
@@ -29,11 +37,16 @@ public class AuthController {
     @PostMapping("/verify-otp")
     public TokenResponse verifyOtp(@RequestBody VerifyOtpRequest request) {
         String storedOtp = otpStore.get(request.getMobile());
-
         if (storedOtp != null && storedOtp.equals(request.getOtp())) {
-            String accessToken = jwtUtil.generateAccessToken(request.getMobile());
-            String refreshToken = jwtUtil.generateRefreshToken(request.getMobile());
-
+            Optional<MemberProfile> member = memberRepository.findByMobileNumber(request.getMobile());
+            MemberProfile finalMember;
+            if(!member.isPresent()) {
+                finalMember = memberRepository.save(MemberProfile.withMobile(request.getMobile()));
+            }else{
+                finalMember = member.get();
+            }
+            String accessToken = jwtUtil.generateAccessToken(request.getMobile(), finalMember.getMemberId());
+            String refreshToken = jwtUtil.generateRefreshToken(request.getMobile(), finalMember.getMemberId());
             otpStore.remove(request.getMobile()); // clear used OTP
             return new TokenResponse(accessToken, refreshToken, "SUCCESS");
         }
@@ -42,13 +55,11 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public TokenResponse refresh(@RequestBody RefreshRequest request) {
-        String userId = jwtUtil.validateToken(request.getRefreshToken());
-        if (userId != null) {
-            String newAccessToken = jwtUtil.generateAccessToken(userId);
-            return new TokenResponse(newAccessToken, request.getRefreshToken(), "SUCCESS");
-        }
-
-        return new TokenResponse("INVALID");
+        Claims claims = jwtUtil.validateToken(request.getRefreshToken());
+        Long userId = Long.valueOf(claims.getSubject());
+        Long mobile = (Long) claims.get("mobile");
+        String newAccessToken = jwtUtil.generateAccessToken(mobile, userId);
+        return new TokenResponse(newAccessToken, request.getRefreshToken(), "SUCCESS");
     }
 }
 

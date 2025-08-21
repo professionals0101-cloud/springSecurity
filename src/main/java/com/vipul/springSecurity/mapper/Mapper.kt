@@ -6,7 +6,6 @@ import com.vipul.springSecurity.model.GroupMemberRelation
 import com.vipul.springSecurity.model.MemberProfile
 import com.vipul.springSecurity.request.GroupRequest
 import com.vipul.springSecurity.request.MemberDetails
-import com.vipul.springSecurity.response.GroupCreateResponse
 import org.springframework.stereotype.Component
 
 @Component
@@ -20,23 +19,31 @@ class Mapper {
         )
     }
 
-    fun mapToMember(members : List<MemberDetails>) : List<MemberProfile> {
+/*    fun mapToMember(members: List<MemberDetails>, existingMembers: List<MemberProfile>) : List<MemberProfile> {
         return members.map { MemberProfile(mobile = it.mobile, memberName = it.name) }
-    }
+    }*/
 
-    fun mapToGroupMember(group: GroupDtl, members: List<MemberProfile>) : List<GroupMemberRelation> {
+    fun mapToGroupMember(
+        group: GroupDtl,
+        members: List<MemberDetails>,
+        existingMembers: List<MemberProfile>,
+        admin: MemberProfile
+    ) : List<GroupMemberRelation> {
+        val mobileMemberPair = existingMembers.associate { m-> m.mobile to m }
         return members.map { member ->
-            if (member.memberName.equals(group.createdBy)) {
-                GroupMemberRelation(group = group.groupId,
-                    member = member.memberId,
+            if (member.mobile.equals(admin.mobile)) {
+                GroupMemberRelation(groupId = group.groupId,
+                    memberId = mobileMemberPair[member.mobile]?.memberId,
                     isAdmin = true,
-                    role = Role.ADMIN.value
+                    role = Role.ADMIN.value,
+                    mobile = member.mobile
                 )
             } else {
-                GroupMemberRelation(group = group.groupId,
-                    member = member.memberId,
-                    isAdmin = true,
-                    role = Role.MEMBER.value
+                GroupMemberRelation(groupId = group.groupId,
+                    memberId = mobileMemberPair[member.mobile]?.memberId,
+                    isAdmin = false,
+                    role = Role.MEMBER.value,
+                    mobile = member.mobile
                 )
             }
         }

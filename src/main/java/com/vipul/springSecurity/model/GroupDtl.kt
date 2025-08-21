@@ -55,7 +55,7 @@ data class GroupDtl(
     var createdTimestamp: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "last_updated_by")
-    var lastUpdatedBy: String? = null,
+    var lastUpdatedBy: Long? = null,
 
     @Column(name = "last_updated_timestamp")
     var lastUpdatedTimestamp: LocalDateTime = LocalDateTime.now()

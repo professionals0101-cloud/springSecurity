@@ -2,12 +2,9 @@ package com.vipul.springSecurity.model
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.math.BigDecimal
 
@@ -18,20 +15,11 @@ data class GroupMemberRelation(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-
     @Column(name = "group_id")
-    val group: Long,
+    val groupId: Long,
 
     @Column(name = "member_id")
-    val member: Long,
-
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
-    val group: GroupDtl,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    val member: MemberProfile,*/
+    val memberId: Long?,
 
     @Column(name = "is_admin")
     val isAdmin: Boolean = false,
@@ -49,6 +37,9 @@ data class GroupMemberRelation(
 
     @Column(name = "nick_name")
     val nickName: String? = null,
+
+    @Column(name = "mobile")
+    val mobile: Long,
 
     @Column(name = "relation_color")
     val relationColor: String? = null // Green | Orange | Red
