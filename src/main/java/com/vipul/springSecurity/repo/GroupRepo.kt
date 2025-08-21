@@ -10,3 +10,4 @@ interface GroupRepo : JpaRepository<GroupDtl, Long>
 
 @Repository
 interface GroupMemberRepository : JpaRepository<GroupMemberRelation, Long>
+

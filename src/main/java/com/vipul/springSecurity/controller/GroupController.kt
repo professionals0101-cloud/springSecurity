@@ -26,6 +26,7 @@ class GroupController(
         return ResponseEntity.ok(group)
     }
 
+
     /*//  Get single group by id
     @GetMapping("/{groupId}")
     fun getGroup(@PathVariable groupId: UUID,

@@ -25,4 +25,15 @@ class GroupMapper {
             members = emptyList()
         )
     }
+    fun mapToDtoList(groups: List<GroupDtl>): List<GroupResponse> {
+        return groups.map { group ->
+            GroupResponse(
+                groupId = group.groupId,
+                groupName = group.groupName,
+                description = group.purpose,
+                createdBy = group.createdBy,
+                members = emptyList() // later you can map members if needed
+            )
+        }
+    }
 }

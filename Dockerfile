@@ -1,28 +1,24 @@
-# Step 1: Use a base image with JDK for building
-FROM eclipse-temurin:21-jdk as builder
-
-# Set working directory
+# Step 1: Build the application
+FROM eclipse-temurin:21-jdk AS builder
 WORKDIR /app
 
-# Copy Maven/Gradle wrapper & project files
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
+# Copy project files
 COPY . .
 
-# If using Maven:
-RUN ./mvnw clean package -DskipTests
-
-# If using Gradle:
-# RUN ./gradlew bootJar --no-daemon
+# Build the app with Maven
+RUN mvn clean package -DskipTests
 
 # Step 2: Use a slim JRE image for running
 FROM eclipse-temurin:21-jre
-
-# Set working directory
 WORKDIR /app
 
 # Copy the built jar from builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Expose
+# Expose port
 EXPOSE 8181
 
 # Run the application
