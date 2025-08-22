@@ -37,7 +37,7 @@ class GroupController(
     }
 
     // List groups for a user
-    @GetMapping("/")
+    @GetMapping
     fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<GroupInfo>> {
         val userId = principal.subject.toLong()
         val groups = groupService.getAllGroupsForUserId(userId)
