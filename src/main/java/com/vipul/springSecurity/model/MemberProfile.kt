@@ -18,7 +18,8 @@ data class MemberProfile(
     @Column(name = "member_name")
     val memberName: String? = null,
 
-    val relation: String? = null,
+    @Column(name = "show_only_admin_groups")
+    var showOnlyAdminGroups: Boolean = false,
 
     @Column(nullable = false, unique = true)
     val mobile: Long,

@@ -118,6 +118,10 @@
                     <compilerPlugins>
                         <plugin>all-open</plugin>
                         <plugin>no-arg</plugin>
+                        <!-- Enables Spring-specific behavior: open classes for @Transactional, @Service, etc. -->
+                        <plugin>spring</plugin>
+                        <!-- Enables JPA-specific behavior: open entities, no-arg constructors -->
+                        <plugin>jpa</plugin>
                     </compilerPlugins>
                     <pluginOptions>
                         <!-- all-open: makes classes with these annotations 'open' -->

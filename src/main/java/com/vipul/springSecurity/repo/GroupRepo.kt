@@ -2,13 +2,10 @@ package com.vipul.springSecurity.repo
 
 import com.vipul.springSecurity.model.GroupDtl
 import com.vipul.springSecurity.model.GroupMemberRelation
-import com.vipul.springSecurity.model.MemberProfile
-import com.vipul.springSecurity.request.MemberDetails
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
-import java.util.Optional
 
 @Repository
 interface GroupRepo : JpaRepository<GroupDtl, Long> {
@@ -22,11 +19,15 @@ interface GroupRepo : JpaRepository<GroupDtl, Long> {
 }
 
 @Repository
-interface GroupMemberRepository : JpaRepository<GroupMemberRelation, Long> {
+interface GroupMemberRepo : JpaRepository<GroupMemberRelation, Long> {
 
-    @Query("SELECT group_name from group_dtl gd INNER JOIN group_member_relation gmr on gd.group_id = gmr.group_id" +
-            " where gmr.member_id = :userId", nativeQuery = true)
-    fun findByUserId(@Param("userId") userId: Long): List<String>
+    @Query("SELECT gd.* from group_dtl gd INNER JOIN group_member_relation gmr on gd.group_id = gmr.group_id" +
+            " where gmr.member_id = :userId and gmr.is_admin in ( :showOnlyAdminGroups )", nativeQuery = true)
+    fun findByUserId(@Param("userId") userId: Long,@Param("showOnlyAdminGroups") showOnlyAdminGroups: List<Boolean>): List<GroupDtl>
+
+    @Query("SELECT * from group_member_relation gmr where gmr.mobile =:mobileNumber", nativeQuery = true)
+    fun findByMobileNumber(@Param("mobileNumber") mobileNumber:Long): List<GroupMemberRelation>
+
 
 }
 

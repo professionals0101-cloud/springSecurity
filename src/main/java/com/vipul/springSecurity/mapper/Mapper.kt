@@ -1,5 +1,6 @@
 package com.vipul.springSecurity.mapper
 
+import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.enum.Role
 import com.vipul.springSecurity.model.GroupDtl
 import com.vipul.springSecurity.model.GroupMemberRelation
@@ -47,5 +48,19 @@ class Mapper {
                 )
             }
         }
+    }
+
+    fun mapToGroupInfoList(groups: List<GroupDtl>): List<GroupInfo> {
+          return groups.map { group -> mapToGroupInfo(group) }
+    }
+
+    private fun mapToGroupInfo(it: GroupDtl): GroupInfo {
+        return GroupInfo(
+            groupId = it.groupId,
+            groupName = it.groupName,
+            groupSpent = it.groupSpent,
+            groupCurrency = it.groupCurrency,
+            country = it.country
+        )
     }
 }

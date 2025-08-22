@@ -1,5 +1,6 @@
 package com.vipul.springSecurity.controller
 
+import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.request.GroupRequest
 import com.vipul.springSecurity.response.GroupCreateResponse
 import com.vipul.springSecurity.service.GroupService
@@ -45,7 +46,7 @@ class GroupController(
 
     // List groups for a user
     @GetMapping("/groups")
-    fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<String>> {
+    fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<GroupInfo>> {
         val userId = principal.subject.toLong()
         val groups = groupService.getAllGroupsForUserId(userId)
         return ResponseEntity.ok(groups)

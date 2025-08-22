@@ -19,7 +19,7 @@ data class GroupMemberRelation(
     val groupId: Long,
 
     @Column(name = "member_id")
-    val memberId: Long?,
+    var memberId: Long?,
 
     @Column(name = "is_admin")
     val isAdmin: Boolean = false,
