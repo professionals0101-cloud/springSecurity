@@ -45,5 +45,17 @@ class GroupService(
         val groups =  groupMemberRepo.findByUserId(userId, groupRequired)
         return  mapper.mapToGroupInfoList(groups)
     }
+
+    fun getGroupForUserId(groupId: Long, userId: Long): GroupInfo {
+        val member = memberRepo.findById(userId).orElseThrow { throw UsernameNotFoundException("Invalid user") }
+        var groupRequired = mutableListOf<Boolean>(true)
+        if(!member.showOnlyAdminGroups){
+            groupRequired.add(false)
+        }
+        val groupRelation =  groupMemberRepo.findByGroupId(groupId)
+        val mobileToMemberMap = memberRepo.findAllById(groupRelation.filter { it.memberId != null }.map{it.memberId})
+            .associate { it.mobile to it }
+        return  mapper.mapToGroupInfo(groupId, groupRelation, mobileToMemberMap)
+    }
 }
 

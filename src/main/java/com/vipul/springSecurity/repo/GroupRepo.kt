@@ -28,6 +28,9 @@ interface GroupMemberRepo : JpaRepository<GroupMemberRelation, Long> {
     @Query("SELECT * from group_member_relation gmr where gmr.mobile =:mobileNumber", nativeQuery = true)
     fun findByMobileNumber(@Param("mobileNumber") mobileNumber:Long): List<GroupMemberRelation>
 
+    @Query("SELECT gmr.* from group_member_relation gmr " +
+            " where gmr.group_id = :groupId", nativeQuery = true)
+    fun findByGroupId(@Param("groupId") groupId : Long) : List<GroupMemberRelation>
 
 }
 

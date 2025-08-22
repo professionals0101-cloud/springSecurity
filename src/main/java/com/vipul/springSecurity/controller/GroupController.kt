@@ -10,13 +10,13 @@ import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/groups")
 class GroupController(
     private val groupService : GroupService
 ) {
 
     // Create new group
-    @PostMapping("/groups")
+    @PostMapping
     fun createGroup(
         @RequestBody groupRequest: GroupRequest,
         @AuthenticationPrincipal principal : Jwt
@@ -26,26 +26,18 @@ class GroupController(
         return ResponseEntity.ok(group)
     }
 
-    /*//  Get single group by id
+    //  Get single group by id
     @GetMapping("/{groupId}")
-    fun getGroup(@PathVariable groupId: UUID,
+    fun getGroup(@PathVariable groupId: Long,
                  @AuthenticationPrincipal principal : Jwt
-    ): ResponseEntity<GroupResponse> {
-
-        val userId: String = principal.getClaim("sub")
-        // Dummy response for now
-        val group = GroupResponse(
-            id = groupId,
-            name = "Trip to Goa",
-            description = "Expenses for Goa Trip",
-            createdBy = "",
-            members = emptyList()
-        )
+    ): ResponseEntity<GroupInfo> {
+        val userId = principal.subject.toLong()
+        val group = groupService.getGroupForUserId(groupId, userId)
         return ResponseEntity.ok(group)
-    }*/
+    }
 
     // List groups for a user
-    @GetMapping("/groups")
+    @GetMapping("/")
     fun listGroups(@AuthenticationPrincipal principal : Jwt): ResponseEntity<List<GroupInfo>> {
         val userId = principal.subject.toLong()
         val groups = groupService.getAllGroupsForUserId(userId)

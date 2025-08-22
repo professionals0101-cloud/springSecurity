@@ -1,6 +1,7 @@
 package com.vipul.springSecurity.mapper
 
 import com.vipul.springSecurity.dto.GroupInfo
+import com.vipul.springSecurity.dto.MemberProfileDto
 import com.vipul.springSecurity.enum.Role
 import com.vipul.springSecurity.model.GroupDtl
 import com.vipul.springSecurity.model.GroupMemberRelation
@@ -54,13 +55,34 @@ class Mapper {
           return groups.map { group -> mapToGroupInfo(group) }
     }
 
-    private fun mapToGroupInfo(it: GroupDtl): GroupInfo {
+     fun mapToGroupInfo(it: GroupDtl): GroupInfo {
         return GroupInfo(
             groupId = it.groupId,
             groupName = it.groupName,
             groupSpent = it.groupSpent,
             groupCurrency = it.groupCurrency,
             country = it.country
+        )
+    }
+
+    fun mapToGroupInfo(groupId : Long, groupRelation: List<GroupMemberRelation>, mobileToMembersMap :Map<Long, MemberProfile>): GroupInfo {
+
+        val members = groupRelation.map { relation->
+            if(mobileToMembersMap.contains(relation.mobile)){
+                val member = mobileToMembersMap.get(relation.mobile)
+                MemberProfileDto(
+                    memberId = member!!.memberId,
+                    mobile = member.mobile,
+                    memberName = member.memberName
+                )
+            }else{
+                MemberProfileDto(mobile = relation.mobile)
+            }
+        }
+
+        return GroupInfo(
+            groupId = groupId,
+            members = members
         )
     }
 }
