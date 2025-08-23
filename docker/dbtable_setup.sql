@@ -50,7 +50,7 @@ CREATE TABLE group_member_relation (
 -- 4) Transaction Table
 CREATE TABLE transaction (
     transaction_id      BIGINT PRIMARY KEY,
-    group_id            BIGINT NOT NULL REFERENCES "group"(group_id) ON DELETE CASCADE,
+    group_id            BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
     payer_id            BIGINT NOT NULL REFERENCES member_profile(member_id),
     receiver_id         BIGINT,
     receiver_type       VARCHAR(50),
