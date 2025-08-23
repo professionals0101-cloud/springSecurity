@@ -26,6 +26,8 @@ public class SecurityConfig {
                     auth.requestMatchers("/api/groups/**").authenticated();
                     auth.requestMatchers("/api/members/**").authenticated();
                     auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/actuator/env").permitAll();
+
                 })
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
