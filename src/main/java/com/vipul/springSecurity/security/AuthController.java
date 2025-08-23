@@ -39,12 +39,7 @@ public class AuthController {
         String storedOtp = otpStore.get(request.getMobile());
         if (storedOtp != null && storedOtp.equals(request.getOtp())) {
             Optional<MemberProfile> member = memberRepository.findByMobileNumber(request.getMobile());
-            MemberProfile finalMember;
-            if(!member.isPresent()) {
-                finalMember = memberRepository.save(MemberProfile.withMobile(request.getMobile()));
-            }else{
-                finalMember = member.get();
-            }
+            MemberProfile finalMember = member.orElseGet(() -> memberRepository.save(MemberProfile.withMobile(request.getMobile())));
             String accessToken = jwtUtil.generateAccessToken(request.getMobile(), finalMember.getMemberId());
             String refreshToken = jwtUtil.generateRefreshToken(request.getMobile(), finalMember.getMemberId());
             otpStore.remove(request.getMobile()); // clear used OTP
