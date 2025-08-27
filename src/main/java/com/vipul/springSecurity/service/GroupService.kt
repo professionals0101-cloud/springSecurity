@@ -29,8 +29,9 @@ class GroupService(
 
         val group = mapper.mapToGroup(userId, request)
         val saved = groupRepo.save(group)
-        val existingMembers = memberRepo.findByMobileNumbers(request.members.map { it.mobile })
-        val groupMembers = mapper.mapToGroupMember(saved, request.members, existingMembers, user)
+
+        val membersExistingAsUsers = memberRepo.findByMobileNumbers(request.members.map { it.mobile })
+        val groupMembers = mapper.mapToGroupMember(saved, request.members, membersExistingAsUsers, user)
         groupMemberRepo.saveAll(groupMembers)
         return GroupCreateResponse(groupId = saved.groupId, message = "SUCCESS")
     }

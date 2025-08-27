@@ -31,27 +31,28 @@ class Mapper {
         existingMembers: List<MemberProfile>,
         admin: MemberProfile
     ) : List<GroupMemberRelation> {
-        val mobileMemberPair = existingMembers.associate { m-> m.mobile to m }
-        return members.map { member ->
-            if (member.mobile.equals(admin.mobile)) {
-                GroupMemberRelation(groupId = group.groupId,
-                    memberId = mobileMemberPair[member.mobile]?.memberId,
-                    isAdmin = true,
-                    role = Role.ADMIN.value,
-                    mobile = member.mobile,
-                    nickName = member.name
-                )
-            } else {
-                GroupMemberRelation(groupId = group.groupId,
-                    memberId = mobileMemberPair[member.mobile]?.memberId,
-                    isAdmin = false,
-                    role = Role.MEMBER.value,
-                    mobile = member.mobile,
-                    nickName = member.name
-                )
-            }
-        }
+        val mobileToMemberPair = existingMembers.associateBy { it.mobile }
+        val membersList = members.filter { !it.mobile.equals(admin.mobile) }.map { member ->
+            GroupMemberRelation(
+                groupId = group.groupId,
+                memberId = mobileToMemberPair[member.mobile]?.memberId,
+                isAdmin = false,
+                role = Role.MEMBER.value,
+                mobile = member.mobile,
+                nickName = member.name
+            )
+        } + listOf(GroupMemberRelation(
+            groupId = group.groupId,
+            memberId = mobileToMemberPair[admin.mobile]?.memberId,
+            isAdmin = true,
+            role = Role.ADMIN.value,
+            mobile = admin.mobile,
+            nickName = admin.memberName
+        ))
+
+        return membersList
     }
+
 
     fun mapToGroupInfoList(groups: List<GroupDtl>): List<GroupInfo> {
           return groups.map { group -> mapToGroupInfo(group) }
