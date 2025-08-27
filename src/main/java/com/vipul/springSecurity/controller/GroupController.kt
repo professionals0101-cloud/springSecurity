@@ -4,6 +4,7 @@ import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.request.GroupRequest
 import com.vipul.springSecurity.response.GroupCreateResponse
 import com.vipul.springSecurity.service.GroupService
+import com.vipul.springSecurity.service.aws.S3Service
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/groups")
 class GroupController(
-    private val groupService : GroupService
+    private val groupService : GroupService,
+    private val s3Service : S3Service
 ) {
 
     // Create new group
@@ -90,4 +92,10 @@ class GroupController(
     ): ResponseEntity<String> {
         return ResponseEntity.ok("Group $groupId deleted successfully")
     }*/
+
+    @GetMapping("/{groupId}/presigned-url")
+    fun generatePreSignedUrl(@RequestParam fileName: String,
+                             @PathVariable groupId : Long) : Map<String, String>{
+        return s3Service.generatePreSignedUrl(fileName,groupId)
+    }
 }
