@@ -38,14 +38,16 @@ class Mapper {
                     memberId = mobileMemberPair[member.mobile]?.memberId,
                     isAdmin = true,
                     role = Role.ADMIN.value,
-                    mobile = member.mobile
+                    mobile = member.mobile,
+                    nickName = member.name
                 )
             } else {
                 GroupMemberRelation(groupId = group.groupId,
                     memberId = mobileMemberPair[member.mobile]?.memberId,
                     isAdmin = false,
                     role = Role.MEMBER.value,
-                    mobile = member.mobile
+                    mobile = member.mobile,
+                    nickName = member.name
                 )
             }
         }
