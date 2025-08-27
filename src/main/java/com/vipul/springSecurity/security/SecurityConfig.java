@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/test").authenticated();
                     auth.requestMatchers("/api/groups/**").authenticated();
+                    auth.requestMatchers("/s3/**").authenticated();
                     auth.requestMatchers("/api/members/**").authenticated();
                     auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/actuator/env").permitAll();
