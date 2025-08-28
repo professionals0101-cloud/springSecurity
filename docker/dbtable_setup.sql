@@ -50,7 +50,7 @@ CREATE TABLE group_member_relation (
 
 -- 4) Transaction Table
 CREATE TABLE transaction (
-    transaction_id      BIGINT PRIMARY KEY,
+    transaction_id      BIGSERIAL PRIMARY KEY,
     group_id            BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
     payer_id            BIGINT NOT NULL REFERENCES member_profile(member_id),
     receiver_id         BIGINT,
@@ -62,6 +62,7 @@ CREATE TABLE transaction (
     created_timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_updated_by     VARCHAR(100),
     is_cash_transaction BOOLEAN DEFAULT FALSE,
+    image_id            BIGSERIAL,
     category            VARCHAR(100),
     status              VARCHAR(20) CHECK (status IN ('Pending','Completed','Failed','Cancelled')),
     description         TEXT,
@@ -83,3 +84,11 @@ INSERT INTO Roles (role_id, role_name) VALUES
 (1, 'Admin'),
 (2, 'Viewer'),
 (3, 'Member');
+
+
+CREATE TABLE transaction_images (
+    image_id BIGSERIAL PRIMARY KEY,
+    transaction_id BIGINT NOT NULL REFERENCES transactions(transaction_id) ON DELETE CASCADE,
+    image_url TEXT NOT NULL,
+    uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
