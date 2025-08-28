@@ -3,18 +3,21 @@ package com.vipul.springSecurity.controller
 import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.request.GroupRequest
 import com.vipul.springSecurity.response.GroupCreateResponse
+import com.vipul.springSecurity.response.OperationResponse
+import com.vipul.springSecurity.service.BillService
 import com.vipul.springSecurity.service.GroupService
-import com.vipul.springSecurity.service.aws.S3Service
+import com.vipul.springSecurity.service.aws.ImageIoService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api/groups")
 class GroupController(
     private val groupService : GroupService,
-    private val s3Service : S3Service
+    private val billService: BillService
 ) {
 
     // Create new group
@@ -93,9 +96,12 @@ class GroupController(
         return ResponseEntity.ok("Group $groupId deleted successfully")
     }*/
 
-    @GetMapping("/{groupId}/presigned-url")
-    fun generatePreSignedUrl(@RequestParam fileName: String,
-                             @PathVariable groupId : Long) : Map<String, String>{
-        return s3Service.generatePreSignedUrl(fileName,groupId)
+
+    @PostMapping("/{groupId}/upload")
+    fun uploadBil(@AuthenticationPrincipal principal : Jwt,
+                  @RequestParam multipartFile: MultipartFile,
+                    @PathVariable groupId : Long) : ResponseEntity<OperationResponse>{
+        val userId = principal.subject.toLong()
+        return ResponseEntity.ok(billService.processBill(userId, groupId, multipartFile))
     }
 }

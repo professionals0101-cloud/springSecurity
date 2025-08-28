@@ -1,11 +1,13 @@
 package com.vipul.springSecurity.mapper
 
+import com.vipul.springSecurity.dto.BillInfo
 import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.dto.MemberProfileDto
 import com.vipul.springSecurity.enum.Role
 import com.vipul.springSecurity.model.GroupDtl
 import com.vipul.springSecurity.model.GroupMemberRelation
 import com.vipul.springSecurity.model.MemberProfile
+import com.vipul.springSecurity.model.Transaction
 import com.vipul.springSecurity.request.GroupRequest
 import com.vipul.springSecurity.request.MemberDetails
 import org.springframework.stereotype.Component
@@ -86,6 +88,17 @@ class Mapper {
         return GroupInfo(
             groupId = groupId,
             members = members
+        )
+    }
+
+    fun mapToTransaction(billInfo: BillInfo, groupId: Long, userId: Long): Transaction {
+        return Transaction(
+            amount = billInfo.total,
+            receiverName = billInfo.vendor,
+            createdTimestamp = billInfo.date,
+            isCashTransaction = false,
+            group = groupId,
+            payer = userId
         )
     }
 }

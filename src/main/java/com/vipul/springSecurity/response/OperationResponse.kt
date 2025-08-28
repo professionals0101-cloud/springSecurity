@@ -1,3 +1,3 @@
 package com.vipul.springSecurity.response
 
-class  OperationResponse (val status : Boolean)
+class  OperationResponse (val status : Boolean, val info : Any?)

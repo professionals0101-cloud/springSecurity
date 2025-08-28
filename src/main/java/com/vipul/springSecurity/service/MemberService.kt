@@ -38,7 +38,7 @@ class MemberService(
             }
         }
         memberRepo.save(member)
-        return OperationResponse(status = true)
+        return OperationResponse(status = true, "SUCCESS")
     }
 
 }
