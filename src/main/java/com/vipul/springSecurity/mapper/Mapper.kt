@@ -43,7 +43,7 @@ class Mapper {
             )
         } + listOf(GroupMemberRelation(
             groupId = group.groupId,
-            memberId = mobileToMemberPair[admin.mobile]?.memberId,
+            memberId = admin.memberId,
             isAdmin = true,
             role = Role.ADMIN.value,
             mobile = admin.mobile,
