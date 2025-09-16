@@ -78,7 +78,7 @@ class Mapper {
                 MemberProfileDto(
                     memberId = member!!.memberId,
                     mobile = member.mobile,
-                    memberName = member.memberName
+                    memberName = relation.nickName
                 )
             }else{
                 MemberProfileDto(mobile = relation.mobile)
