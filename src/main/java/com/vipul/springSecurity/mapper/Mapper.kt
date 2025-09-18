@@ -73,16 +73,23 @@ class Mapper {
     fun mapToGroupInfo(groupId : Long, groupRelation: List<GroupMemberRelation>, mobileToMembersMap :Map<Long, MemberProfile>): GroupInfo {
 
         val members = groupRelation.map { relation->
-            if(mobileToMembersMap.contains(relation.mobile)){
+            if(mobileToMembersMap.contains(relation.mobile)) {
                 val member = mobileToMembersMap.get(relation.mobile)
                 MemberProfileDto(
                     memberId = member!!.memberId,
                     mobile = member.mobile,
                     memberName = relation.nickName
                 )
-            }else{
-                MemberProfileDto(mobile = relation.mobile)
             }
+            else{
+                MemberProfileDto(
+                    memberId = relation!!.id,
+                    mobile = relation.mobile,
+                    memberName = relation.nickName)
+            }
+//            }else{
+//                MemberProfileDto(mobile = relation.mobile)
+//            }
         }
 
         return GroupInfo(

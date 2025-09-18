@@ -28,6 +28,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/api/members/**").authenticated();
                     auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/actuator/env").permitAll();
+                    auth.requestMatchers("/updateProfile/**").authenticated();
 
                 })
                 .sessionManagement(session -> session

@@ -22,7 +22,7 @@ data class MemberProfile(
     var showOnlyAdminGroups: Boolean = true,
 
     @Column(nullable = false, unique = true)
-    val mobile: Long,
+    val mobile: Long=0L,
 
     val email: String? = null,
     val avatarUrl: String? = null

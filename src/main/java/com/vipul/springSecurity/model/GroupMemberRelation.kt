@@ -36,7 +36,7 @@ data class GroupMemberRelation(
     val joinedBy: String? = null, // Link | QR | Code
 
     @Column(name = "nick_name")
-    val nickName: String? = null,
+    var nickName: String? = null,
 
     @Column(name = "mobile")
     val mobile: Long,
