@@ -10,6 +10,7 @@ import com.vipul.springSecurity.response.GroupCreateResponse
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import kotlin.math.log
 
 @Service
 class GroupService(
@@ -55,8 +56,9 @@ class GroupService(
         }
         val groupRelation =  groupMemberRepo.findByGroupId(groupId)
         val mobileToMemberMap = memberRepo.findAllById(groupRelation.filter { it.memberId != null }.map{it.memberId})
-            .associate { it.mobile to it }
+            .associate { it.mobile to it}
         return  mapper.mapToGroupInfo(groupId, groupRelation, mobileToMemberMap)
     }
+
 }
 

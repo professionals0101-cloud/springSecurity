@@ -1,0 +1,105 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\t<modelVersion>4.0.0</modelVersion>\r\n\t<parent>\r\n\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t<artifactId>spring-boot-starter-parent</artifactId>\r\n\t\t<version>3.5.4</version>\r\n\t\t<relativePath/> <!-- lookup parent from repository -->\r\n\t</parent>\r\n\t<groupId>com.vipul</groupId>\r\n\t<artifactId>springSecurity</artifactId>\r\n\t<version>0.0.1-SNAPSHOT</version>\r\n\t<name>springSecurity</name>\r\n\t<description>Demo project for Spring Boot</description>\r\n\t<url/>\r\n\t<licenses>\r\n\t\t<license/>\r\n\t</licenses>\r\n\t<developers>\r\n\t\t<developer/>\r\n\t</developers>\r\n\t<scm>\r\n\t\t<connection/>\r\n\t\t<developerConnection/>\r\n\t\t<tag/>\r\n\t\t<url/>\r\n\t</scm>\r\n\t<properties>\r\n\t\t<java.version>21</java.version>\r\n        <kotlin.version>2.2.0</kotlin.version>\r\n    </properties>\r\n\t<dependencies>\r\n        <dependency>\r\n            <groupId>org.jetbrains.kotlin</groupId>\r\n            <artifactId>kotlin-stdlib-jdk8</artifactId>\r\n        </dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-security</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\r\n\t\t</dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.jetbrains.kotlin</groupId>\r\n            <artifactId>kotlin-reflect</artifactId>\r\n            <version>${kotlin.version}</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.postgresql</groupId>\r\n            <artifactId>postgresql</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-devtools</artifactId>\r\n\t\t\t<scope>runtime</scope>\r\n\t\t\t<optional>true</optional>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-api</artifactId>\r\n            <version>0.11.5</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-impl</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-jackson</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\t</dependencies>\r\n\r\n\t<build>\r\n\t\t<plugins>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\r\n\t\t\t</plugin>\r\n            <plugin>\r\n                <groupId>org.jetbrains.kotlin</groupId>\r\n                <artifactId>kotlin-maven-plugin</artifactId>\r\n                <version>${kotlin.version}</version>\r\n                <executions>\r\n                    <execution>\r\n                        <id>compile</id>\r\n                        <phase>compile</phase>\r\n                        <goals><goal>compile</goal></goals>\r\n                    </execution>\r\n                    <execution>\r\n                        <id>test-compile</id>\r\n                        <phase>test-compile</phase>\r\n                        <goals><goal>test-compile</goal></goals>\r\n                    </execution>\r\n                </executions>\r\n                <configuration>\r\n                    <compilerPlugins>\r\n                        <plugin>all-open</plugin>\r\n                        <plugin>no-arg</plugin>\r\n                        <!-- Enables Spring-specific behavior: open classes for @Transactional, @Service, etc. -->\r\n                        <plugin>spring</plugin>\r\n                        <!-- Enables JPA-specific behavior: open entities, no-arg constructors -->\r\n                        <plugin>jpa</plugin>\r\n                    </compilerPlugins>\r\n                    <pluginOptions>\r\n                        <!-- all-open: makes classes with these annotations 'open' -->\r\n                        <option>all-open:annotation=jakarta.persistence.Entity</option>\r\n                        <option>all-open:annotation=jakarta.persistence.MappedSuperclass</option>\r\n                        <option>all-open:annotation=jakarta.persistence.Embeddable</option>\r\n\r\n                        <!-- no-arg: generates no-arg constructor -->\r\n                        <option>no-arg:annotation=jakarta.persistence.Entity</option>\r\n                        <option>no-arg:annotation=jakarta.persistence.MappedSuperclass</option>\r\n                        <option>no-arg:annotation=jakarta.persistence.Embeddable</option>\r\n                    </pluginOptions>\r\n                </configuration>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <executions>\r\n                    <execution>\r\n                        <id>default-compile</id>\r\n                        <phase>none</phase>\r\n                    </execution>\r\n                    <execution>\r\n                        <id>default-testCompile</id>\r\n                        <phase>none</phase>\r\n                    </execution>\r\n                    <execution>\r\n                        <id>compile</id>\r\n                        <phase>compile</phase>\r\n                        <goals>\r\n                            <goal>compile</goal>\r\n                        </goals>\r\n                    </execution>\r\n                    <execution>\r\n                        <id>testCompile</id>\r\n                        <phase>test-compile</phase>\r\n                        <goals>\r\n                            <goal>testCompile</goal>\r\n                        </goals>\r\n                    </execution>\r\n                </executions>\r\n            </plugin>\r\n        </plugins>\r\n\t</build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision cbe0a6a4b1ed9cef70a38c5502cb1aa88f983cfc)
++++ b/pom.xml	(date 1755940510386)
+@@ -45,6 +45,10 @@
+ 		</dependency>
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
++            <artifactId>spring-boot-starter-actuator</artifactId>
++        </dependency>
++        <dependency>
++            <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-data-jpa</artifactId>
+         </dependency>
+         <dependency>
+Index: src/main/java/com/vipul/springSecurity/security/SecurityConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vipul.springSecurity.security;\r\n\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.config.Customizer;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.oauth2.jwt.JwtDecoder;\r\nimport org.springframework.security.oauth2.jwt.NimbusJwtDecoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n\r\n    private final String SECRET = \"jhashaj34jklda9adk9pa92jjb3kbhjakhsjii99adsk9wjb9bjbas9999asdjk99999asjbkjb232jbjkbads8baksjdbkbaksj\";\r\n\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {\r\n        return httpSecurity.csrf(AbstractHttpConfigurer::disable)\r\n                .authorizeHttpRequests(auth -> {\r\n                    auth.requestMatchers(\"/test\").authenticated();\r\n                    auth.requestMatchers(\"/api/groups/**\").authenticated();\r\n                    auth.requestMatchers(\"/api/members/**\").authenticated();\r\n                    auth.requestMatchers(\"/auth/**\").permitAll();\r\n                })\r\n                .sessionManagement(session -> session\r\n                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))\r\n                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())) //  enable JWT decoding\r\n                .build();\r\n    }\r\n\r\n    @Bean\r\n    public JwtDecoder jwtDecoder() {\r\n        // Use the same secret key you used to generate JWT\r\n        return NimbusJwtDecoder.withSecretKey(\r\n                new javax.crypto.spec.SecretKeySpec(SECRET.getBytes(), \"HmacSHA256\")\r\n        ).build();\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/vipul/springSecurity/security/SecurityConfig.java b/src/main/java/com/vipul/springSecurity/security/SecurityConfig.java
+--- a/src/main/java/com/vipul/springSecurity/security/SecurityConfig.java	(revision cbe0a6a4b1ed9cef70a38c5502cb1aa88f983cfc)
++++ b/src/main/java/com/vipul/springSecurity/security/SecurityConfig.java	(date 1755940568710)
+@@ -26,6 +26,8 @@
+                     auth.requestMatchers("/api/groups/**").authenticated();
+                     auth.requestMatchers("/api/members/**").authenticated();
+                     auth.requestMatchers("/auth/**").permitAll();
++                    auth.requestMatchers("/actuator/env").permitAll();
++
+                 })
+                 .sessionManagement(session -> session
+                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+Index: src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=springSecurity\r\nserver.port =8181\r\n\r\nspring.profiles.active=local\r\nspring.jpa.properties.hibernate.jdbc.time_zone=Asia/Kolkata\r\n\r\n\r\n# DataSource config\r\nspring.datasource.url=${SPRING_DATASOURCE_URL}\r\nspring.datasource.username=${SPRING_DATASOURCE_USERNAME}\r\nspring.datasource.password=${SPRING_DATASOURCE_PASSWORD}\r\nspring.datasource.driver-class-name=org.postgresql.Driver\r\n\r\n# Optional: Hibernate / JPA config\r\nspring.jpa.show-sql=true\r\nspring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+--- a/src/main/resources/application.properties	(revision cbe0a6a4b1ed9cef70a38c5502cb1aa88f983cfc)
++++ b/src/main/resources/application.properties	(date 1755946832906)
+@@ -14,3 +14,12 @@
+ # Optional: Hibernate / JPA config
+ spring.jpa.show-sql=true
+ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
++
++# Expose all actuator endpoints over HTTP
++management.endpoints.web.exposure.include=*
++
++# Actuator base path (default is /actuator)
++management.endpoints.web.base-path=/actuator
++
++management.endpoint.env.show-values=ALWAYS
++management.endpoint.configprops.show-values=ALWAYS
+Index: docker/docker-compose.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>version: '3.8'\r\nservices:\r\n  postgres:\r\n    image: postgres:15\r\n    container_name: postgres_learning\r\n    environment:\r\n      POSTGRES_DB: learning\r\n      POSTGRES_USER: admin\r\n      POSTGRES_PASSWORD: admin123\r\n    ports:\r\n      - \"5432:5432\"\r\n    volumes:\r\n      - postgres_data:/var/lib/postgresql/data\r\n      - ./dbtable_setup.sql:/docker-entrypoint-initdb.d/dbtable_setup.sql  # optional schema\r\n\r\n  adminer:\r\n    image: adminer\r\n    container_name: adminer_ui\r\n    environment:\r\n      TZ: Asia/Kolkata\r\n    ports:\r\n      - \"8080:8080\"\r\n\r\nvolumes:\r\n  postgres_data:\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/docker/docker-compose.yml b/docker/docker-compose.yml
+--- a/docker/docker-compose.yml	(revision cbe0a6a4b1ed9cef70a38c5502cb1aa88f983cfc)
++++ b/docker/docker-compose.yml	(date 1755946230347)
+@@ -7,8 +7,11 @@
+       POSTGRES_DB: learning
+       POSTGRES_USER: admin
+       POSTGRES_PASSWORD: admin123
++      TZ: Asia/Kolkata  # ✅ add this line
++
++
+     ports:
+-      - "5432:5432"
++      - "5433:5432"
+     volumes:
+       - postgres_data:/var/lib/postgresql/data
+       - ./dbtable_setup.sql:/docker-entrypoint-initdb.d/dbtable_setup.sql  # optional schema
+Index: docker/dbtable_setup.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>-- 1) Group Table\r\nCREATE TABLE group_dtl (\r\n    group_id              BIGSERIAL PRIMARY KEY,\r\n    group_name            VARCHAR(255) NOT NULL,\r\n    group_amount          NUMERIC(12,2) DEFAULT 0,\r\n    group_spent           NUMERIC(12,2) DEFAULT 0,\r\n    group_balance         NUMERIC(12,2) DEFAULT 0,\r\n    group_currency        VARCHAR(20) DEFAULT 'INR',\r\n    country               VARCHAR(100) DEFAULT 'India',\r\n    purpose               VARCHAR(255),\r\n    usage_type            VARCHAR(50), -- Payments | Planning | Saving\r\n    category              VARCHAR(50), -- Family | Friends | Colleagues | Others\r\n    group_max_limit       NUMERIC(12,2),\r\n    daily_usage_limit     NUMERIC(12,2),\r\n    per_person_limit      NUMERIC(12,2),\r\n    per_transaction_limit NUMERIC(12,2),\r\n    created_by            BIGINT,\r\n    created_timestamp     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\r\n    last_updated_by       BIGINT,\r\n    last_updated_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP\r\n);\r\n\r\n-- 2) Member Profile Table\r\nCREATE TABLE member_profile (\r\n    member_id   BIGSERIAL PRIMARY KEY,\r\n    member_name VARCHAR(255),\r\n    relation    VARCHAR(100),\r\n    mobile      BIGINT UNIQUE NOT NULL,\r\n    email       VARCHAR(255),\r\n    avatar_url  TEXT\r\n);\r\n\r\n\r\n-- 3) Group-Member-Relation Table\r\nCREATE TABLE group_member_relation (\r\n    id             BIGSERIAL PRIMARY KEY,\r\n    group_id       BIGINT NOT NULL REFERENCES \"group_dtl\"(group_id) ON DELETE CASCADE,\r\n    member_id      BIGINT ,\r\n    is_admin       BOOLEAN DEFAULT FALSE,\r\n    mobile         BIGINT NOT NULL,\r\n    role           VARCHAR(20) CHECK (role IN ('Admin','Member','Viewer')),\r\n    amount_added   NUMERIC(12,2) DEFAULT 0,\r\n    amount_spent   NUMERIC(12,2) DEFAULT 0,\r\n    joined_by      VARCHAR(20) CHECK (joined_by IN ('Link','QR','Code')),\r\n    nick_name      VARCHAR(100),\r\n    relation_color VARCHAR(20) CHECK (relation_color IN ('Green','Orange','Red'))\r\n);\r\n\r\n\r\n-- 4) Transaction Table\r\nCREATE TABLE transaction (\r\n    transaction_id      BIGINT PRIMARY KEY,\r\n    group_id            BIGINT NOT NULL REFERENCES \"group\"(group_id) ON DELETE CASCADE,\r\n    payer_id            BIGINT NOT NULL REFERENCES member_profile(member_id),\r\n    receiver_id         BIGINT,\r\n    receiver_type       VARCHAR(50),\r\n    receiver_name       VARCHAR(255),\r\n    receiver_account    VARCHAR(255),\r\n    included_members    JSONB,\r\n    amount              NUMERIC(12,2) NOT NULL,\r\n    created_timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\r\n    last_updated_by     VARCHAR(100),\r\n    is_cash_transaction BOOLEAN DEFAULT FALSE,\r\n    category            VARCHAR(100),\r\n    status              VARCHAR(20) CHECK (status IN ('Pending','Completed','Failed','Cancelled')),\r\n    description         TEXT,\r\n    transaction_type    VARCHAR(20) CHECK (transaction_type IN ('Add','Pay')),\r\n    metadata            JSONB,\r\n    last_updated_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP\r\n);\r\n\r\n\r\n-- 5) Roles Table (reference if needed)\r\n\r\nCREATE TABLE roles (\r\n    role_id   SERIAL PRIMARY KEY,\r\n    role_name VARCHAR(20) UNIQUE NOT NULL CHECK (role_name IN ('Admin','Member','Viewer'))\r\n);\r\n\r\n\r\nINSERT INTO Roles (role_id, role_name) VALUES\r\n(1, 'Admin'),\r\n(2, 'Viewer'),\r\n(3, 'Member');
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/docker/dbtable_setup.sql b/docker/dbtable_setup.sql
+--- a/docker/dbtable_setup.sql	(revision cbe0a6a4b1ed9cef70a38c5502cb1aa88f983cfc)
++++ b/docker/dbtable_setup.sql	(date 1755941398014)
+@@ -50,7 +50,7 @@
+ -- 4) Transaction Table
+ CREATE TABLE transaction (
+     transaction_id      BIGINT PRIMARY KEY,
+-    group_id            BIGINT NOT NULL REFERENCES "group"(group_id) ON DELETE CASCADE,
++    group_id            BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
+     payer_id            BIGINT NOT NULL REFERENCES member_profile(member_id),
+     receiver_id         BIGINT,
+     receiver_type       VARCHAR(50),

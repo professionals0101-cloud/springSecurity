@@ -3,6 +3,8 @@ import com.vipul.springSecurity.dto.OtpRequest;
 import com.vipul.springSecurity.dto.VerifyOtpRequest;
 import com.vipul.springSecurity.model.MemberProfile;
 import com.vipul.springSecurity.repo.MemberRepo;
+import com.vipul.springSecurity.request.UserUpdateProfileRequest;
+import com.vipul.springSecurity.response.UserUpdateProfileResponse;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +50,8 @@ public class AuthController {
         return new TokenResponse("INVALID");
     }
 
+
+
     @PostMapping("/refresh")
     public TokenResponse refresh(@RequestBody RefreshRequest request) {
         Claims claims = jwtUtil.validateToken(request.getRefreshToken());
@@ -56,5 +60,8 @@ public class AuthController {
         String newAccessToken = jwtUtil.generateAccessToken(mobile, userId);
         return new TokenResponse(newAccessToken, request.getRefreshToken(), "SUCCESS");
     }
+
+
+
 }
 

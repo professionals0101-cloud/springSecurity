@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="979f7231-7a16-4804-9c2b-47aaa3ff6183" name="Changes" comment="adding actuator">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/change_in_my_branch_22_8_25_raat_ko_12_03.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/change_in_my_branch_22_8_25_raat_ko_12_03/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/controller/UpdateProfileController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/repo/UserUpdateRespo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/request/UserUpdateProfileRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/response/UserUpdateProfileResponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/service/UpdateProfileService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/springSecurity.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application-local.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/AppBeans.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/SpringSecurityApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/controller/ExpenseController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/controller/GroupController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/controller/MemberController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/controller/UpdateProfileController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/BillInfo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/GroupDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/GroupInfo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/MemberProfileDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/OtpRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/RoleDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/TransactionDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/VerifyOtpRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/dto/WalletPartnerRelationDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/enum/Role.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/exception/GlobalExceptionHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/mapper/Mapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/model/GroupDtl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/model/GroupMemberRelation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/model/MemberProfile$Companion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/model/MemberProfile.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/model/Role.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/model/Transaction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/repo/GroupMemberRepo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/repo/GroupRepo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/repo/MemberRepo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/request/GroupRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/request/MemberDetails.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/request/UserUpdateProfileRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/response/GroupCreateResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/response/GroupForUsers.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/response/OperationResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/response/UserUpdateProfileResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/security/AuthController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/security/JwtUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/security/OtpResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/security/RefreshRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/security/SecurityConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/security/TokenResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/BillDetector.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/BillService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/GroupService$createGroup$user$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/GroupService$getAllGroupsForUserId$member$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/GroupService$getGroupForUserId$member$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/GroupService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/MemberService$updateMember$member$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/MemberService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/UpdateProfileService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/service/aws/ImageIoService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/vipul/springSecurity/util/FileNameUtilKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/mapper/Mapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/mapper/Mapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/model/GroupMemberRelation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/model/GroupMemberRelation.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/model/MemberProfile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/model/MemberProfile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/repo/MemberRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/repo/MemberRepo.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/security/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/security/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/security/RefreshRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/security/RefreshRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/service/GroupService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vipul/springSecurity/service/GroupService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev/bot_and_cloud" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;prarooptrivedi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/professionals0101-cloud/springSecurity&quot;,
+    &quot;accountId&quot;: &quot;a20c26e8-8f59-423f-9157-bdf073c2a877&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="31MvhXinCWjOaX1vRUGwbDEHOp0" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.SpringSecurityApplication.executor": "Run",
+    "Docker.Dockerfile.executor": "Run",
+    "Docker.docker.adminer: Compose Deployment.executor": "Run",
+    "Docker.docker.postgres: Compose Deployment.executor": "Run",
+    "Docker.docker: Compose Deployment.executor": "Run",
+    "Maven.springSecurity [clean,install].executor": "Run",
+    "Maven.springSecurity [clean].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev/vipul",
+    "ignore.virus.scanning.warn.message": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.SpringSecurityApplication">
+    <configuration name="SpringSecurityApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vipul.springSecurity.SpringSecurityApplication" />
+      <module name="springSecurity" />
+      <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Kolkata" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vipul.springSecurity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Vipul" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Vipul" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker.adminer: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="adminer" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.SpringSecurityApplication" />
+      <item itemvalue="Docker.Dockerfile" />
+      <item itemvalue="Docker.docker: Compose Deployment" />
+      <item itemvalue="Docker.docker.adminer: Compose Deployment" />
+      <item itemvalue="Docker.docker.postgres: Compose Deployment" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker.postgres: Compose Deployment" />
+        <item itemvalue="Docker.docker.adminer: Compose Deployment" />
+        <item itemvalue="Docker.docker: Compose Deployment" />
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="Application.SpringSecurityApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="979f7231-7a16-4804-9c2b-47aaa3ff6183" name="Changes" comment="" />
+      <created>1755346875998</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755346875998</updated>
+    </task>
+    <task id="LOCAL-00001" summary="change in my branch 22/8/25 raat ko 12:03">
+      <option name="closed" value="true" />
+      <created>1755801219738</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1755801219738</updated>
+    </task>
+    <task id="LOCAL-00002" summary="adding actuator">
+      <option name="closed" value="true" />
+      <created>1755946993361</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1755946993362</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixing existing issues with structure." />
+    <MESSAGE value="change in my branch 22/8/25 raat ko 12:03" />
+    <MESSAGE value="adding actuator" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding actuator" />
+  </component>
+</project>

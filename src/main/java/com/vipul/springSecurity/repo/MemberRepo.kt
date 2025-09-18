@@ -15,4 +15,5 @@ interface MemberRepo : JpaRepository<MemberProfile, Long> {
 
     @Query("SELECT * from member_profile mp where mp.mobile in (:mobileNumbers)", nativeQuery = true)
     fun findByMobileNumbers(@Param("mobileNumbers") mobileNumbers: List<Long>) :List<MemberProfile>
+
 }
