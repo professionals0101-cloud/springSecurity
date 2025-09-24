@@ -2,6 +2,7 @@ package com.vipul.springSecurity.service
 
 import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.mapper.Mapper
+import com.vipul.springSecurity.model.MemberProfile
 import com.vipul.springSecurity.repo.GroupMemberRepo
 import com.vipul.springSecurity.repo.GroupRepo
 import com.vipul.springSecurity.repo.MemberRepo
@@ -32,7 +33,9 @@ class GroupService(
         val saved = groupRepo.save(group)
 
         val membersExistingAsUsers = memberRepo.findByMobileNumbers(request.members.map { it.mobile })
-        val groupMembers = mapper.mapToGroupMember(saved, request.members, membersExistingAsUsers, user)
+        val allMembers = mapper.mapToMembers(request.members, membersExistingAsUsers)
+        memberRepo.saveAll(allMembers)
+        val groupMembers = mapper.mapToGroupMember(saved, allMembers, user)
         groupMemberRepo.saveAll(groupMembers)
         return GroupCreateResponse(groupId = saved.groupId, message = "SUCCESS")
     }
@@ -55,9 +58,8 @@ class GroupService(
             groupRequired.add(false)
         }
         val groupRelation =  groupMemberRepo.findByGroupId(groupId)
-        val mobileToMemberMap = memberRepo.findAllById(groupRelation.filter { it.memberId != null }.map{it.memberId})
-            .associate { it.mobile to it}
-        return  mapper.mapToGroupInfo(groupId, groupRelation, mobileToMemberMap)
+        val idToMemberMap = memberRepo.findAllById(groupRelation.map{it.memberId}).associate { it.memberId to it}
+        return  mapper.mapToGroupInfo(groupId, groupRelation, idToMemberMap)
     }
 
 }

@@ -33,6 +33,10 @@ data class MemberProfile(
         fun withMobile(mobile: Long): MemberProfile =
             MemberProfile(mobile = mobile)
 
+        @JvmStatic
+        fun withMobileAndName(mobile: Long, memberName: String): MemberProfile =
+            MemberProfile(mobile = mobile, memberName = memberName)
+
     }
 }
 

@@ -29,10 +29,6 @@ public class AuthController {
     public OtpResponse sendOtp(@RequestBody OtpRequest request) {
         String otp = String.valueOf((int)(Math.random() * 9000) + 1000);
         otpStore.put(request.getMobile(), otp);
-
-        // In real system → send via SMS/Email
-        System.out.println("OTP for " + request.getMobile() + " is: " + otp);
-
         return new OtpResponse(otp);
     }
 

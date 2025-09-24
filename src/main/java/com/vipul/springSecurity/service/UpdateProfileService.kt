@@ -1,19 +1,15 @@
 package com.vipul.springSecurity.service
 
 import com.vipul.springSecurity.model.MemberProfile
-import com.vipul.springSecurity.repo.GroupMemberRepo
 import com.vipul.springSecurity.repo.MemberRepo
 import com.vipul.springSecurity.request.UserUpdateProfileRequest
 import com.vipul.springSecurity.response.UserUpdateProfileResponse
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Service
-import org.springframework.security.oauth2.jwt.Jwt
-import software.amazon.awssdk.services.textract.model.UpdateAdapterRequest
 
 
 @Service
-class UpdateProfileService(val memberRepo: MemberRepo) {
+class ProfileService(val memberRepo: MemberRepo) {
 
 
     fun updateProfile(

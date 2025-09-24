@@ -28,7 +28,8 @@ CREATE TABLE member_profile (
     mobile      BIGINT UNIQUE NOT NULL,
     show_only_admin_groups BOOLEAN,
     email       VARCHAR(255),
-    avatar_url  TEXT
+    avatar_url  TEXT,
+    registration_status VARCHAR(20) CHECK (registration_status IN ('Guest','Registered')) DEFAULT 'Guest'
 );
 
 
@@ -36,12 +37,8 @@ CREATE TABLE member_profile (
 CREATE TABLE group_member_relation (
     id             BIGSERIAL PRIMARY KEY,
     group_id       BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
-    member_id      BIGINT ,
-    is_admin       BOOLEAN DEFAULT FALSE,
-    mobile         BIGINT NOT NULL,
+    member_id      BIGINT NOT NULL REFERENCES "member_profile"(member_id) ON DELETE CASCADE,
     role           VARCHAR(20) CHECK (role IN ('Admin','Member','Viewer')),
-    amount_added   NUMERIC(12,2) DEFAULT 0,
-    amount_spent   NUMERIC(12,2) DEFAULT 0,
     joined_by      VARCHAR(20) CHECK (joined_by IN ('Link','QR','Code')),
     nick_name      VARCHAR(100),
     relation_color VARCHAR(20) CHECK (relation_color IN ('Green','Orange','Red'))

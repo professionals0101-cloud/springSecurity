@@ -12,7 +12,7 @@ interface GroupRepo : JpaRepository<GroupDtl, Long> {
 
     @Query("SELECT EXISTS (\n" +
             "    select 1 from group_dtl gd inner join group_member_relation gmr on gd.group_id = gmr.group_id\n" +
-            "where member_id = :memberId and is_admin = true and gd.group_name =:groupName\n" +
+            "where member_id = :memberId and gd.group_name =:groupName\n" +
             ");", nativeQuery = true)
     fun isGroupNameExists(@Param("groupName") groupName: String,
                           @Param("memberId") memberId: Long): Boolean
@@ -22,7 +22,7 @@ interface GroupRepo : JpaRepository<GroupDtl, Long> {
 interface GroupMemberRepo : JpaRepository<GroupMemberRelation, Long> {
 
     @Query("SELECT gd.* from group_dtl gd INNER JOIN group_member_relation gmr on gd.group_id = gmr.group_id" +
-            " where gmr.member_id = :userId and gmr.is_admin in ( :showOnlyAdminGroups )", nativeQuery = true)
+            " where gmr.member_id = :userId ", nativeQuery = true)
     fun findByUserId(@Param("userId") userId: Long,@Param("showOnlyAdminGroups") showOnlyAdminGroups: List<Boolean>): List<GroupDtl>
 
     @Query("SELECT * from group_member_relation gmr where gmr.mobile =:mobileNumber", nativeQuery = true)

@@ -6,6 +6,7 @@ import com.vipul.springSecurity.enum.Role
 import com.vipul.springSecurity.model.GroupDtl
 import com.vipul.springSecurity.model.GroupMemberRelation
 import com.vipul.springSecurity.model.MemberProfile
+import com.vipul.springSecurity.model.MemberProfile.Companion.withMobileAndName
 import com.vipul.springSecurity.request.GroupRequest
 import com.vipul.springSecurity.request.MemberDetails
 import org.springframework.stereotype.Component
@@ -27,26 +28,21 @@ class Mapper {
 
     fun mapToGroupMember(
         group: GroupDtl,
-        members: List<MemberDetails>,
         existingMembers: List<MemberProfile>,
         admin: MemberProfile
     ) : List<GroupMemberRelation> {
         val mobileToMemberPair = existingMembers.associateBy { it.mobile }
-        val membersList = members.filter { !it.mobile.equals(admin.mobile) }.map { member ->
+        val membersList = existingMembers.filter { !it.mobile.equals(admin.mobile) }.map { member ->
             GroupMemberRelation(
                 groupId = group.groupId,
-                memberId = mobileToMemberPair[member.mobile]?.memberId,
-                isAdmin = false,
+                memberId = mobileToMemberPair[member.mobile]?.memberId!!,
                 role = Role.MEMBER.value,
-                mobile = member.mobile,
-                nickName = member.name
+                nickName = member.memberName
             )
         } + listOf(GroupMemberRelation(
             groupId = group.groupId,
             memberId = admin.memberId,
-            isAdmin = true,
             role = Role.ADMIN.value,
-            mobile = admin.mobile,
             nickName = admin.memberName
         ))
 
@@ -68,11 +64,11 @@ class Mapper {
         )
     }
 
-    fun mapToGroupInfo(groupId : Long, groupRelation: List<GroupMemberRelation>, mobileToMembersMap :Map<Long, MemberProfile>): GroupInfo {
+    fun mapToGroupInfo(groupId : Long, groupRelation: List<GroupMemberRelation>, idToMembersMap :Map<Long, MemberProfile>): GroupInfo {
 
         val members = groupRelation.map { relation->
-            if(mobileToMembersMap.contains(relation.mobile)) {
-                val member = mobileToMembersMap.get(relation.mobile)
+            if(idToMembersMap.contains(relation.memberId)) {
+                val member = idToMembersMap.get(relation.memberId)
                 MemberProfileDto(
                     memberId = member!!.memberId,
                     mobile = member.mobile,
@@ -80,19 +76,25 @@ class Mapper {
                 )
             }
             else{
-                MemberProfileDto(
-                    memberId = relation!!.id,
-                    mobile = relation.mobile,
-                    memberName = relation.nickName)
+                throw RuntimeException("member id must exist")
             }
-//            }else{
-//                MemberProfileDto(mobile = relation.mobile)
-//            }
         }
 
         return GroupInfo(
             groupId = groupId,
             members = members
         )
+    }
+
+    fun mapToMembers(members: List<MemberDetails>, existingMembers: List<MemberProfile>) : List<MemberProfile> {
+        val existingMobiles = existingMembers.map { it.mobile }.toSet()
+        val missingMembers = members.filter { it.mobile !in existingMobiles }
+
+        val newMembers = missingMembers.map { member-> withMobileAndName(
+            mobile = member.mobile,
+            memberName = member.name)
+        }
+
+        return newMembers +existingMembers
     }
 }

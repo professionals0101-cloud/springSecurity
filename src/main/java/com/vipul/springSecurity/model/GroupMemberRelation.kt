@@ -19,27 +19,15 @@ data class GroupMemberRelation(
     val groupId: Long,
 
     @Column(name = "member_id")
-    var memberId: Long?,
-
-    @Column(name = "is_admin")
-    val isAdmin: Boolean = false,
+    var memberId: Long,
 
     val role: String? = null, // Admin | Member | Viewer
-
-    @Column(name = "amount_added")
-    val amountAdded: BigDecimal = BigDecimal.ZERO,
-
-    @Column(name = "amount_spent")
-    val amountSpent: BigDecimal = BigDecimal.ZERO,
 
     @Column(name = "joined_by")
     val joinedBy: String? = null, // Link | QR | Code
 
     @Column(name = "nick_name")
     var nickName: String? = null,
-
-    @Column(name = "mobile")
-    val mobile: Long,
 
     @Column(name = "relation_color")
     val relationColor: String? = null // Green | Orange | Red
