@@ -37,8 +37,8 @@ CREATE TABLE member_profile (
 CREATE TABLE group_member_relation (
     id             BIGSERIAL PRIMARY KEY,
     group_id       BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
-    member_id      BIGINT NOT NULL REFERENCES "member_profile"(member_id) ON DELETE CASCADE,
-    role           VARCHAR(20) CHECK (role IN ('Admin','Member','Viewer')),
+    member_id      BIGINT NOT NULL REFERENCES "member_profile"(member_id),
+    role           VARCHAR(20) CHECK (role IN ('ADMIN','MEMBER','VIEWER')),
     joined_by      VARCHAR(20) CHECK (joined_by IN ('Link','QR','Code')),
     nick_name      VARCHAR(100),
     relation_color VARCHAR(20) CHECK (relation_color IN ('Green','Orange','Red'))
@@ -46,7 +46,7 @@ CREATE TABLE group_member_relation (
 
 
 -- 4) Transaction Table
-CREATE TABLE transaction (
+CREATE TABLE transaction_dtl (
     transaction_id      BIGSERIAL PRIMARY KEY,
     group_id            BIGINT NOT NULL REFERENCES "group_dtl"(group_id) ON DELETE CASCADE,
     payer_id            BIGINT NOT NULL REFERENCES member_profile(member_id),
@@ -54,7 +54,6 @@ CREATE TABLE transaction (
     receiver_type       VARCHAR(50),
     receiver_name       VARCHAR(255),
     receiver_account    VARCHAR(255),
-    included_members    JSONB,
     amount              NUMERIC(12,2) NOT NULL,
     created_timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_updated_by     VARCHAR(100),
@@ -68,6 +67,16 @@ CREATE TABLE transaction (
     last_updated_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE transaction_shares (
+    transaction_id   BIGINT        NOT NULL,
+    member_id        BIGINT        NOT NULL,
+    share_amount   DECIMAL(10,2) NOT NULL CHECK (share_amount >= 0),
+
+    PRIMARY KEY (transaction_id, member_id),
+
+    FOREIGN KEY (transaction_id) REFERENCES "transaction_dtl"(transaction_id) ON DELETE CASCADE,
+    FOREIGN KEY (member_id) REFERENCES "member_profile"(member_id)
+);
 
 -- 5) Roles Table (reference if needed)
 

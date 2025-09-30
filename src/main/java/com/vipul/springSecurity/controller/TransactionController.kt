@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.security.oauth2.jwt.Jwt
+import org.springframework.web.bind.annotation.RequestBody
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -18,7 +19,7 @@ class TransactionController(
 
     /**must be admin or member for this **/
     @PostMapping
-    fun createExpense(@AuthenticationPrincipal principal : Jwt, expenseRequest : ExpenseRequest) : ResponseEntity<OperationResponse>{
+    fun createExpense(@AuthenticationPrincipal principal : Jwt, @RequestBody expenseRequest : ExpenseRequest) : ResponseEntity<OperationResponse>{
         val userId = principal.subject.toLong()
         transactionService.createExpense(userId = userId, expenseRequest = expenseRequest)
         return ResponseEntity.ok(OperationResponse(true))

@@ -2,6 +2,8 @@ package com.vipul.springSecurity.repo
 
 import com.vipul.springSecurity.model.GroupDtl
 import com.vipul.springSecurity.model.GroupMemberRelation
+import com.vipul.springSecurity.model.TransactionDtl
+import com.vipul.springSecurity.model.TransactionShare
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -31,6 +33,17 @@ interface GroupMemberRepo : JpaRepository<GroupMemberRelation, Long> {
     @Query("SELECT gmr.* from group_member_relation gmr " +
             " where gmr.group_id = :groupId", nativeQuery = true)
     fun findByGroupId(@Param("groupId") groupId : Long) : List<GroupMemberRelation>
+
+}
+
+
+@Repository
+interface TransactionRepo : JpaRepository<TransactionDtl, Long> {
+
+}
+
+@Repository
+interface TransactionShareRepo : JpaRepository<TransactionShare, Long> {
 
 }
 

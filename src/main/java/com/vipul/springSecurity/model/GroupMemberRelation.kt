@@ -1,7 +1,10 @@
 package com.vipul.springSecurity.model
 
+import com.vipul.springSecurity.enum.Role
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -21,7 +24,8 @@ data class GroupMemberRelation(
     @Column(name = "member_id")
     var memberId: Long,
 
-    val role: String? = null, // Admin | Member | Viewer
+    @Enumerated(EnumType.STRING)
+    val role: Role? = null, // Admin | Member | Viewer
 
     @Column(name = "joined_by")
     val joinedBy: String? = null, // Link | QR | Code

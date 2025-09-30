@@ -36,13 +36,13 @@ class Mapper {
             GroupMemberRelation(
                 groupId = group.groupId,
                 memberId = mobileToMemberPair[member.mobile]?.memberId!!,
-                role = Role.MEMBER.value,
+                role = Role.MEMBER,
                 nickName = member.memberName
             )
         } + listOf(GroupMemberRelation(
             groupId = group.groupId,
             memberId = admin.memberId,
-            role = Role.ADMIN.value,
+            role = Role.ADMIN,
             nickName = admin.memberName
         ))
 
