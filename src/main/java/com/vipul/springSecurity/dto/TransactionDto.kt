@@ -4,11 +4,8 @@ import java.math.BigDecimal
 
 data class TransactionDto(
     val transactionId: Long? = null,
-    val walletId: Long,
-    val payerId: Long,
-    val amount: BigDecimal,
-    val transactionType: String,
-    val status: String,
+    val payer: String,
+    val amount: Double,
     val description: String? = null,
-    val includedMembers: List<Long>? = null
+    val userPayable : Double?
 )

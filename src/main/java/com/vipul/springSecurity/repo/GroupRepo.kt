@@ -37,14 +37,7 @@ interface GroupMemberRepo : JpaRepository<GroupMemberRelation, Long> {
 }
 
 
-@Repository
-interface TransactionRepo : JpaRepository<TransactionDtl, Long> {
 
-}
 
-@Repository
-interface TransactionShareRepo : JpaRepository<TransactionShare, Long> {
-
-}
 
 

@@ -1,12 +1,13 @@
 package com.vipul.springSecurity.service
 
+import com.vipul.springSecurity.dto.TransactionDto
 import com.vipul.springSecurity.enum.Role
 import com.vipul.springSecurity.enum.SplitType
 import com.vipul.springSecurity.mapper.TransactionMapper
 import com.vipul.springSecurity.model.GroupMemberRelation
+import com.vipul.springSecurity.model.TransactionDtl
 import com.vipul.springSecurity.model.TransactionShare
 import com.vipul.springSecurity.repo.GroupMemberRepo
-import com.vipul.springSecurity.repo.GroupRepo
 import com.vipul.springSecurity.repo.MemberRepo
 import com.vipul.springSecurity.repo.TransactionRepo
 import com.vipul.springSecurity.repo.TransactionShareRepo
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service
 @Service
 class TransactionService (
     val groupMemberRepo: GroupMemberRepo,
+    val memberRepo : MemberRepo,
     val transactionRepo: TransactionRepo,
     val transactionShareRepo: TransactionShareRepo,
     val transactionMapper : TransactionMapper
@@ -91,6 +93,39 @@ class TransactionService (
                 }
             }
         }
+    }
+
+    fun getAllExpenses(userId: Long, groupId: Long) : List<TransactionDto> {
+
+        val transactions = transactionRepo.findByGroupId(groupId)
+        val transactionIds = mutableListOf<Long>()
+        val memberIds = mutableListOf<Long>()
+        transactions.forEach { t ->
+            transactionIds.add(t.transactionId)
+            memberIds.add(t.payer_id)
+        }
+
+        val transactionShare = transactionShareRepo.findByMemberIdAndTransactionIds(userId, transactionIds);
+        val transactionIdToTransactionShareMap = transactionShare.associateBy { share -> share.transactionId }
+
+        val members = memberRepo.findAllById(memberIds);
+        val memberIdToMemberMap = members.associateBy { member -> member.memberId }
+
+        val transactionsResp = ArrayList<TransactionDto>()
+        transactions.forEach { transaction ->
+            val userShare = transactionIdToTransactionShareMap.get(transaction.transactionId)?.shareAmount
+            val userPayable = userShare?.let { share ->
+                if(transaction.payer_id == userId ) userShare - transaction.amount else share
+            }
+
+            transactionsResp.add(TransactionDto(
+            transactionId =transaction.transactionId,
+            payer =  memberIdToMemberMap.getValue(transaction.payer_id)?.memberName?:"",
+            amount = transaction.amount,
+            userPayable = userPayable
+        )) }
+
+        return transactionsResp
     }
 }
 
