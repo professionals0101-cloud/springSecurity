@@ -22,10 +22,6 @@ class Mapper {
         )
     }
 
-/*    fun mapToMember(members: List<MemberDetails>, existingMembers: List<MemberProfile>) : List<MemberProfile> {
-        return members.map { MemberProfile(mobile = it.mobile, memberName = it.name) }
-    }*/
-
     fun mapToGroupMember(
         group: GroupDtl,
         existingMembers: List<MemberProfile>,
