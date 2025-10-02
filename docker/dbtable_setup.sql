@@ -55,6 +55,7 @@ CREATE TABLE transaction_dtl (
     receiver_name       VARCHAR(255),
     receiver_account    VARCHAR(255),
     amount              NUMERIC(12,2) NOT NULL,
+    created_by          BIGINT,
     created_timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_updated_by     VARCHAR(100),
     is_cash_transaction BOOLEAN DEFAULT FALSE,
