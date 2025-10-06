@@ -23,7 +23,7 @@ public class AuthController {
     private final JwtUtil jwtUtil = new JwtUtil();
 
     // Mock OTP store (in real life, use DB or cache like Redis)
-    private final Map<Long, String> otpStore = new HashMap<>();
+    private final Map<String , String> otpStore = new HashMap<>();
 
     @PostMapping("/send-otp")
     public OtpResponse sendOtp(@RequestBody OtpRequest request) {
@@ -52,7 +52,7 @@ public class AuthController {
     public TokenResponse refresh(@RequestBody RefreshRequest request) {
         Claims claims = jwtUtil.validateToken(request.getRefreshToken());
         Long userId = Long.valueOf(claims.getSubject());
-        Long mobile = (Long) claims.get("mobile");
+        String mobile = (String) claims.get("mobile");
         String newAccessToken = jwtUtil.generateAccessToken(mobile, userId);
         return new TokenResponse(newAccessToken, request.getRefreshToken(), "SUCCESS");
     }

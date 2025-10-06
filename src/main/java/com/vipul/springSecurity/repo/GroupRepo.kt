@@ -28,7 +28,7 @@ interface GroupMemberRepo : JpaRepository<GroupMemberRelation, Long> {
     fun findByUserId(@Param("userId") userId: Long,@Param("showOnlyAdminGroups") showOnlyAdminGroups: List<Boolean>): List<GroupDtl>
 
     @Query("SELECT * from group_member_relation gmr where gmr.mobile =:mobileNumber", nativeQuery = true)
-    fun findByMobileNumber(@Param("mobileNumber") mobileNumber:Long): List<GroupMemberRelation>
+    fun findByMobileNumber(@Param("mobileNumber") mobileNumber: String): List<GroupMemberRelation>
 
     @Query("SELECT gmr.* from group_member_relation gmr " +
             " where gmr.group_id = :groupId", nativeQuery = true)

@@ -22,7 +22,7 @@ data class MemberProfile(
     var showOnlyAdminGroups: Boolean = true,
 
     @Column(nullable = false, unique = true)
-    val mobile: Long=0L,
+    val mobile: String,
 
     val email: String? = null,
     val avatarUrl: String? = null
@@ -30,11 +30,11 @@ data class MemberProfile(
     companion object {
         /** Java can call: MemberProfile.withMobile(9876543210L) */
         @JvmStatic
-        fun withMobile(mobile: Long): MemberProfile =
+        fun withMobile(mobile: String): MemberProfile =
             MemberProfile(mobile = mobile)
 
         @JvmStatic
-        fun withMobileAndName(mobile: Long, memberName: String): MemberProfile =
+        fun withMobileAndName(mobile: String, memberName: String): MemberProfile =
             MemberProfile(mobile = mobile, memberName = memberName)
 
     }
