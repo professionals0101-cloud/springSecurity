@@ -2,16 +2,14 @@ package com.vipul.springSecurity.service
 
 import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.mapper.Mapper
-import com.vipul.springSecurity.model.MemberProfile
 import com.vipul.springSecurity.repo.GroupMemberRepo
 import com.vipul.springSecurity.repo.GroupRepo
 import com.vipul.springSecurity.repo.MemberRepo
 import com.vipul.springSecurity.request.GroupRequest
-import com.vipul.springSecurity.response.GroupCreateResponse
+import com.vipul.springSecurity.response.GroupResponse
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import kotlin.math.log
 
 @Service
 class GroupService(
@@ -22,7 +20,7 @@ class GroupService(
 ) {
     @Transactional
     fun createGroup(request: GroupRequest,
-                     userId : Long ): GroupCreateResponse {
+                     userId : Long ): GroupResponse {
         val user = memberRepo.findById(userId).orElseThrow { throw UsernameNotFoundException("Invalid user") }
 
         if (groupRepo.isGroupNameExists(request.name, userId)) {
@@ -37,7 +35,7 @@ class GroupService(
         memberRepo.saveAll(allMembers)
         val groupMembers = mapper.mapToGroupMember(saved, allMembers, user)
         groupMemberRepo.saveAll(groupMembers)
-        return GroupCreateResponse(groupId = saved.groupId, message = "SUCCESS")
+        return GroupResponse(groupId = saved.groupId, message = "SUCCESS")
     }
 
     fun getAllGroupsForUserId(userId: Long) : List<GroupInfo> {

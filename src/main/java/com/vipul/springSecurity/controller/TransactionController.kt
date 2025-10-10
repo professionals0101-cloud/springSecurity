@@ -33,4 +33,8 @@ class TransactionController(
         val userId = principal.subject.toLong()
         return ResponseEntity.ok(transactionService.getAllExpenses(userId = userId, groupId = groupId))
     }
+
+    //TODO delete expense
+    //TODO edit expense
+
 }

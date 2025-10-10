@@ -2,7 +2,8 @@ package com.vipul.springSecurity.controller
 
 import com.vipul.springSecurity.dto.GroupInfo
 import com.vipul.springSecurity.request.GroupRequest
-import com.vipul.springSecurity.response.GroupCreateResponse
+import com.vipul.springSecurity.request.MemberDetails
+import com.vipul.springSecurity.response.GroupResponse
 import com.vipul.springSecurity.service.GroupService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -20,7 +21,7 @@ class GroupController(
     fun createGroup(
         @RequestBody groupRequest: GroupRequest,
         @AuthenticationPrincipal principal : Jwt
-    ): ResponseEntity<GroupCreateResponse> {
+    ): ResponseEntity<GroupResponse> {
         val userId = principal.subject.toLong()
         val group = groupService.createGroup(groupRequest, userId);
         return ResponseEntity.ok(group)
@@ -43,51 +44,36 @@ class GroupController(
         val groups = groupService.getAllGroupsForUserId(userId)
         return ResponseEntity.ok(groups)
     }
-/*
-    //  Update group details
-    @PutMapping("/{groupId}")
-    fun updateGroup(
-        @PathVariable groupId: UUID,
-        @RequestBody request: GroupRequest,
+
+    // Add member group details
+    @PostMapping("/{groupId}/member")
+    fun addMember(
+        @PathVariable groupId: Long,
+        @RequestBody member: MemberDetails,
         @AuthenticationPrincipal principal : Jwt
     ): ResponseEntity<GroupResponse> {
         val userId: String = principal.getClaim("sub")
-        val updated = GroupResponse(
-            id = groupId,
-            name = request.name,
-            description = request.description,
-            createdBy = userId,
-            members = request.members
-        )
-        return ResponseEntity.ok(updated)
+        val groupResponse = null;
+        return ResponseEntity.ok(groupResponse)
     }
 
-    //  Add member to group
-    @PostMapping("/{groupId}/members")
-    fun addMember(
-        @PathVariable groupId: UUID,
-        @RequestParam userId: UUID,
+    //delete member group details
+    @DeleteMapping("/{groupId}/member/{memberId}")
+    fun deleteMember(
+        @PathVariable groupId: Long,
+        @PathVariable memberId: Long,
         @AuthenticationPrincipal principal : Jwt
-    ): ResponseEntity<String> {
-
-        return ResponseEntity.ok("User $userId added to group $groupId")
-    }
-
-    // Remove member from group
-    @DeleteMapping("/{groupId}/members/{userId}")
-    fun removeMember(
-        @PathVariable groupId: UUID,
-        @PathVariable userId: UUID,
-        @AuthenticationPrincipal principal : Jwt
-    ): ResponseEntity<String> {
-        return ResponseEntity.ok("User $userId removed from group $groupId")
+    ): ResponseEntity<GroupResponse> {
+        val userId: String = principal.getClaim("sub")
+        val groupResponse = null;
+        return ResponseEntity.ok(groupResponse)
     }
 
     //  Delete group
     @DeleteMapping("/{groupId}")
-    fun deleteGroup(@PathVariable groupId: UUID,
+    fun deleteGroup(@PathVariable groupId: Long,
                     @AuthenticationPrincipal principal : Jwt
-    ): ResponseEntity<String> {
-        return ResponseEntity.ok("Group $groupId deleted successfully")
-    }*/
+    ): ResponseEntity<GroupResponse> {
+        return ResponseEntity.ok(GroupResponse(message = "SUCCESS", groupId = groupId))
+    }
 }
