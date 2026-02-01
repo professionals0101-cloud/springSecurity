@@ -25,7 +25,7 @@ CREATE TABLE member_profile (
     member_id   BIGSERIAL PRIMARY KEY,
     member_name VARCHAR(255),
     relation    VARCHAR(100),
-    mobile      BIGINT UNIQUE NOT NULL,
+    mobile      VARCHAR (20) DEFAULT 'BLANK',
     show_only_admin_groups BOOLEAN,
     email       VARCHAR(255),
     avatar_url  TEXT,

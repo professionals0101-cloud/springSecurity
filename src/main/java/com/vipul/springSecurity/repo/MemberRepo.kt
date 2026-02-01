@@ -11,9 +11,9 @@ import java.util.Optional
 interface MemberRepo : JpaRepository<MemberProfile, Long> {
 
     @Query("SELECT * from member_profile mp where mp.mobile =:mobileNumber", nativeQuery = true)
-    fun findByMobileNumber(@Param("mobileNumber") mobileNumber:Long) : Optional<MemberProfile>
+    fun findByMobileNumber(@Param("mobileNumber") mobileNumber: String) : Optional<MemberProfile>
 
     @Query("SELECT * from member_profile mp where mp.mobile in (:mobileNumbers)", nativeQuery = true)
-    fun findByMobileNumbers(@Param("mobileNumbers") mobileNumbers: List<Long>) :List<MemberProfile>
+    fun findByMobileNumbers(@Param("mobileNumbers") mobileNumbers: List<String>) :List<MemberProfile>
 
 }

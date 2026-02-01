@@ -4,14 +4,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VerifyOtpRequest {
-    private Long mobile;
+    private String mobile;
     private String otp;
 
-    public Long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Long mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

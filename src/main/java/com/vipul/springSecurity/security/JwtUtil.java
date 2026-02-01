@@ -18,7 +18,7 @@ public class JwtUtil {
     private final long ACCESS_TOKEN_VALIDITY = 15 * 60 * 1000; // 15 min
     private final long REFRESH_TOKEN_VALIDITY = 7 * 24 * 60 * 60 * 1000; // 7 days
 
-    public String generateAccessToken(Long mobile, Long userId) {
+    public String generateAccessToken(String mobile, Long userId) {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("mobile", mobile);
@@ -30,7 +30,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String generateRefreshToken(Long mobile, Long userId) {
+    public String generateRefreshToken(String mobile, Long userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("mobile", mobile);
         return Jwts.builder()
